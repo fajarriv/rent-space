@@ -39,8 +39,8 @@ public class Space {
 
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name = "type_name")
-    private SpaceType spaceType;
+    @JoinColumn()
+    private SpaceType type;
 
     @OneToOne(mappedBy = "space", cascade = CascadeType.ALL, orphanRemoval = true)
     private Reservation reservation;

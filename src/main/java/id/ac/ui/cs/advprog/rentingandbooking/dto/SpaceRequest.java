@@ -16,13 +16,12 @@ import java.util.Date;
 public class SpaceRequest {
     private String name;
 
-    private Date date;
+    private String date;
 
     private Integer price;
 
     private Integer capacity;
 
     private String description;
-
-    private Boolean isAvailable;
+    private String typeName;
 }
