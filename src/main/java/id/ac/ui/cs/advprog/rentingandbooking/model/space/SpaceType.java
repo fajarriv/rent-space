@@ -22,6 +22,6 @@ public class SpaceType {
     private String name;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "spaceType")
+    @OneToMany(mappedBy = "type")
     private List<Space> spaces;
 }

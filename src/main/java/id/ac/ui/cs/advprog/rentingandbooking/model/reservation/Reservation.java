@@ -29,14 +29,17 @@ public class Reservation {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "space_id", nullable = false)
     @JsonBackReference
-    private Space spaceId;
+    private Space space;
 
-    @Column(nullable = false, columnDefinition = "INT CHECK (price > 0)")
+    @Column(nullable = false)
     private Integer spacePrice;
 
+    @ManyToOne
+    private Invoice invoice;
+
     //userID
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false)
-    private UUID userId;
+//    @GeneratedValue(strategy = GenerationType.UUID)
+//    @Column(nullable = false)
+//    private UUID userId;
 
 }
