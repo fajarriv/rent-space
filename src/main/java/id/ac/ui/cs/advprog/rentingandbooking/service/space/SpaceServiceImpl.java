@@ -1,7 +1,10 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
+import id.ac.ui.cs.advprog.rentingandbooking.dto.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
+import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Invoice;
+import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
@@ -63,10 +66,26 @@ public class SpaceServiceImpl implements SpaceService {
                 .price(request.getPrice())
                 .capacity(request.getCapacity())
                 .isAvailable(true)
+                .isValidated(false)
                 .build();
 
         spaceRepository.save(newSpace);
         return newSpace;
+    }
+
+    @Override
+    public Reservation rent(ReservationRequest request) throws ParseException {
+        Date date = DateUtils.parseDate(request.getDate());
+        Space space = findById(request.getSpace().getId());
+        int totalPrice = space.getPrice() * request.getDuration();
+        Invoice newInvoice = Invoice.builder()
+                .createdAt((java.sql.Date) date)
+                .totalPrice(totalPrice)
+                .isCompleted(false)
+                .paymentMethod(request.getPaymentMethod())
+                .build();
+
+        return null;
     }
 
     @Override
