@@ -7,7 +7,7 @@ variables:
   CONTAINER_NAME: $CONTAINER_NAME
   GCP_USERNAME: $GCP_USERNAME
   GCP_STATIC_IP: $GCP_STATIC_IP
-  POSTGRES_DB: authentication
+  POSTGRES_DB: renting-and-booking
   POSTGRES_HOST: postgres
   POSTGRES_PORT: 5432
   POSTGRES_USER: postgres
