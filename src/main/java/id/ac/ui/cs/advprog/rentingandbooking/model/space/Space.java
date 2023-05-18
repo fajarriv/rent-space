@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.rentingandbooking.model.space;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class Space {
     private Integer id;
     @Column(nullable = false)
     private String name;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date date;
     @Column(nullable = false, columnDefinition = "INT CHECK (price > 0)")
@@ -42,18 +44,20 @@ public class Space {
 
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn()
-    private SpaceType type;
+    @JoinColumn(name = "category_name", nullable = false)
+    private SpaceCategory category;
 
     @OneToOne(mappedBy = "space", cascade = CascadeType.ALL, orphanRemoval = true)
     private Reservation reservation;
 
+    @Enumerated(EnumType.STRING)
+    private SpaceType type;
 
     //TODO: Layanan opsional
 //    @ElementCollection
 //    private List<String> facilities;
 
-
+//TODO: Column for user (owner)
 //    @JsonBackReference
 //    @ManyToOne
 //    @JoinColumn(name = "_user_id", nullable = false)

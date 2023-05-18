@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpaceTypeRequest {
+public class SpaceCategoryRequest {
     private String name;
 }

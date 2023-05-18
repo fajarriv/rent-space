@@ -23,5 +23,6 @@ public class SpaceRequest {
     private Integer capacity;
 
     private String description;
-    private String typeName;
+    private String categoryName;
+    private String type;
 }

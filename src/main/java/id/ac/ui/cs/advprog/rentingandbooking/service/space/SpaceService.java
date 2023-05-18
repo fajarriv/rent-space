@@ -3,7 +3,6 @@ package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceTypeRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 

@@ -37,9 +37,6 @@ public class Reservation {
     @ManyToOne
     private Invoice invoice;
 
-    //userID
-//    @GeneratedValue(strategy = GenerationType.UUID)
-//    @Column(nullable = false)
-//    private UUID userId;
+//TODO: Column for user
 
 }
