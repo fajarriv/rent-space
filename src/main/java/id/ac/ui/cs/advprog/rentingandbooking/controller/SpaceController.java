@@ -13,24 +13,22 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/space")
+@RequestMapping("/api/v1/space")
 @RequiredArgsConstructor
 public class SpaceController {
 
     private final SpaceService spaceService;
 
-    @GetMapping("/all")
+    @GetMapping("/all-spaces")
     public ResponseEntity<List<Space>> getAllSpace() {
         List<Space> response;
-        // TODO: Lengkapi kode berikut
         response = spaceService.findAll();
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all-distinct")
+    @GetMapping("")
     public ResponseEntity<List<SpaceResponse>> getAllDistinct() {
         List<SpaceResponse> response;
-        // TODO: Lengkapi kode berikut
         response = spaceService.findAllDistinct();
         return ResponseEntity.ok(response);
     }
@@ -42,14 +40,14 @@ public class SpaceController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/type/{type}")
-    public ResponseEntity<List<Space>> getSpaceByType(@PathVariable String type) {
+    @GetMapping("/by-type/{typeName}")
+    public ResponseEntity<List<Space>> getSpaceByType(@PathVariable String typeName) {
         List<Space> response;
-        response = spaceService.findAllByType(type);
+        response = spaceService.findAllByType(typeName);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<Space> addSpace(@RequestBody SpaceRequest request) {
         Space response;
         try {
