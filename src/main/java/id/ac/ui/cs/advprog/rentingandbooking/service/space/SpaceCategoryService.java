@@ -8,7 +8,9 @@ import java.util.List;
 public interface SpaceCategoryService {
     List<SpaceCategory> findAll();
 
-    SpaceCategory findById(String name);
+    SpaceCategory findByName(String name);
+
+    List<SpaceCategory> findByType(String type);
 
     SpaceCategory create(SpaceCategoryRequest spaceCategoryRequest);
 }

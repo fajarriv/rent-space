@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SpaceCategoryRequest {
     private String name;
+    
+    private String type;
 }

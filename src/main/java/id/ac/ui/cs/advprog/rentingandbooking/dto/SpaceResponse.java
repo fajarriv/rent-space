@@ -1,7 +1,6 @@
 package id.ac.ui.cs.advprog.rentingandbooking.dto;
 
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
-import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,15 +16,13 @@ public class SpaceResponse {
     private Integer price;
     private Integer capacity;
     private String description;
-    private String categoryName;
-    private String type;
+    private SpaceCategory category;
 
-    public SpaceResponse(String name, String description, SpaceCategory category, Integer capacity, Integer price, SpaceType type) {
+    public SpaceResponse(String name, String description, SpaceCategory category, Integer capacity, Integer price) {
         this.name = name;
         this.description = description;
         this.capacity = capacity;
-        this.categoryName = category.getName();
+        this.category = category;
         this.price = price;
-        this.type = type.toString();
     }
 }

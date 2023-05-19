@@ -50,8 +50,6 @@ public class Space {
     @OneToOne(mappedBy = "space", cascade = CascadeType.ALL, orphanRemoval = true)
     private Reservation reservation;
 
-    @Enumerated(EnumType.STRING)
-    private SpaceType type;
 
     //TODO: Layanan opsional
 //    @ElementCollection

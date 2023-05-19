@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.rentingandbooking.controller;
 
 import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceCategoryRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import id.ac.ui.cs.advprog.rentingandbooking.service.space.SpaceCategoryService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,15 @@ public class SpaceCategoryController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{type}")
+    public ResponseEntity<List<SpaceCategory>> getCategoryByType(@PathVariable String type) {
+        List<SpaceCategory> response;
+        response = spaceCategoryService.findByType(type);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("")
-    public ResponseEntity<SpaceCategory> addSpace(@RequestBody SpaceCategoryRequest request) {
+    public ResponseEntity<SpaceCategory> addSpaceCategory(@RequestBody SpaceCategoryRequest request) {
         SpaceCategory response;
         response = spaceCategoryService.create(request);
         return ResponseEntity.ok(response);

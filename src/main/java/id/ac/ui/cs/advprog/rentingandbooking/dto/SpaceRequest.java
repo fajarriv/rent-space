@@ -24,5 +24,5 @@ public class SpaceRequest {
 
     private String description;
     private String categoryName;
-    private String type;
+
 }

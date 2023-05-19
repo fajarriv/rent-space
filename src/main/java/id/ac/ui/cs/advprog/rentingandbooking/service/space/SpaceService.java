@@ -14,7 +14,7 @@ public interface SpaceService {
 
     List<SpaceResponse> findAllDistinct();
 
-    List<Space> findAllByType(String typeName);
+    List<Space> findAllByCategory(String typeName);
 
     List<Space> findByName(String name);
 

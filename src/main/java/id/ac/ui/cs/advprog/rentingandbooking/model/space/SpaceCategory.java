@@ -20,6 +20,9 @@ public class SpaceCategory {
     @Column(nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private SpaceType type;
+
     @JsonBackReference
     @OneToMany(mappedBy = "category")
     private List<Space> spaces;

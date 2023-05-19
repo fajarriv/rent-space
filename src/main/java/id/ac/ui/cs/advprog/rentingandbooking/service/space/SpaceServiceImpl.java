@@ -7,7 +7,6 @@ import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Invoice;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
-import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
 
 import id.ac.ui.cs.advprog.rentingandbooking.util.DateUtils;
@@ -38,8 +37,8 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public List<Space> findAllByType(String typeName) {
-        SpaceCategory type = spaceCategoryService.findById(typeName);
+    public List<Space> findAllByCategory(String typeName) {
+        SpaceCategory type = spaceCategoryService.findByName(typeName);
         return spaceRepository.findDistinctByCategory(type);
     }
 
@@ -58,17 +57,16 @@ public class SpaceServiceImpl implements SpaceService {
     @Override
     public Space create(SpaceRequest request) throws ParseException {
         Date date = DateUtils.parseDate(request.getDate());
-        spaceCategoryService.findById(request.getCategoryName());
+        spaceCategoryService.findByName(request.getCategoryName());
         Space newSpace = Space.builder()
                 .name(request.getName())
                 .description(request.getDescription())
                 .date(date)
-                .category(spaceCategoryService.findById(request.getCategoryName()))
+                .category(spaceCategoryService.findByName(request.getCategoryName()))
                 .price(request.getPrice())
                 .capacity(request.getCapacity())
                 .isAvailable(true)
                 .isValidated(false)
-                .spaceType(SpaceType.valueOf(request.getType()))
                 .build();
 
         spaceRepository.save(newSpace);

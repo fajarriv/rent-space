@@ -43,7 +43,7 @@ public class SpaceController {
     @GetMapping("/by-category/{typeName}")
     public ResponseEntity<List<Space>> getSpaceByType(@PathVariable String typeName) {
         List<Space> response;
-        response = spaceService.findAllByType(typeName);
+        response = spaceService.findAllByCategory(typeName);
         return ResponseEntity.ok(response);
     }
 
