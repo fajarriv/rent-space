@@ -18,6 +18,7 @@ public interface SpaceRepository extends JpaRepository<Space, Integer> {
 
     List<Space> findByName(String name);
 
-    List<Space> findDistinctByCategory(SpaceCategory type);
-    
+    @Query(value = "SELECT DISTINCT new id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse(s.name,s.description,s.category ,s.capacity,s.price) FROM Space s WHERE s.category = ?1")
+    List<SpaceResponse> findDistinctByCategory(SpaceCategory category);
+
 }

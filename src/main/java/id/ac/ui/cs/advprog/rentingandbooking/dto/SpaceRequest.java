@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -16,7 +17,7 @@ import java.util.Date;
 public class SpaceRequest {
     private String name;
 
-    private String date;
+    private List<Date> date;
 
     private Integer price;
 
@@ -24,5 +25,6 @@ public class SpaceRequest {
 
     private String description;
     private String categoryName;
+    private List<String> facilities;
 
 }

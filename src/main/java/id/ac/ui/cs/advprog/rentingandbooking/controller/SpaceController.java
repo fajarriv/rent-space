@@ -41,15 +41,15 @@ public class SpaceController {
     }
 
     @GetMapping("/by-category/{typeName}")
-    public ResponseEntity<List<Space>> getSpaceByType(@PathVariable String typeName) {
-        List<Space> response;
+    public ResponseEntity<List<SpaceResponse>> getSpaceByType(@PathVariable String typeName) {
+        List<SpaceResponse> response;
         response = spaceService.findAllByCategory(typeName);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("")
-    public ResponseEntity<Space> addSpace(@RequestBody SpaceRequest request) {
-        Space response;
+    public ResponseEntity<List<Space>> creatSpaces(@RequestBody SpaceRequest request) {
+        List<Space> response;
         try {
             response = spaceService.create(request);
         } catch (ParseException e) {

@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -50,6 +51,8 @@ public class Space {
     @OneToOne(mappedBy = "space", cascade = CascadeType.ALL, orphanRemoval = true)
     private Reservation reservation;
 
+    @ElementCollection
+    private List<String> facilities;
 
     //TODO: Layanan opsional
 //    @ElementCollection

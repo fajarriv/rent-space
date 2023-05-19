@@ -37,7 +37,7 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public List<Space> findAllByCategory(String typeName) {
+    public List<SpaceResponse> findAllByCategory(String typeName) {
         SpaceCategory type = spaceCategoryService.findByName(typeName);
         return spaceRepository.findDistinctByCategory(type);
     }
@@ -55,22 +55,26 @@ public class SpaceServiceImpl implements SpaceService {
 
 
     @Override
-    public Space create(SpaceRequest request) throws ParseException {
-        Date date = DateUtils.parseDate(request.getDate());
-        spaceCategoryService.findByName(request.getCategoryName());
-        Space newSpace = Space.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .date(date)
-                .category(spaceCategoryService.findByName(request.getCategoryName()))
-                .price(request.getPrice())
-                .capacity(request.getCapacity())
-                .isAvailable(true)
-                .isValidated(false)
-                .build();
+    public List<Space> create(SpaceRequest request) throws ParseException {
+//        Iterate through the list of date from request.getDate() then create a new space for each date
+        List<Date> allDate = request.getDate();
+        SpaceCategory category = spaceCategoryService.findByName(request.getCategoryName());
+        for (Date date : allDate) {
+            Space newSpace = Space.builder()
+                    .name(request.getName())
+                    .description(request.getDescription())
+                    .date(date)
+                    .category(category)
+                    .price(request.getPrice())
+                    .capacity(request.getCapacity())
+                    .isAvailable(true)
+                    .isValidated(false)
+                    .facilities(request.getFacilities())
+                    .build();
+            spaceRepository.save(newSpace);
 
-        spaceRepository.save(newSpace);
-        return newSpace;
+        }
+        return spaceRepository.findByName(request.getName()).stream().toList();
     }
 
     @Override

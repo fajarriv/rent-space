@@ -14,13 +14,13 @@ public interface SpaceService {
 
     List<SpaceResponse> findAllDistinct();
 
-    List<Space> findAllByCategory(String typeName);
+    List<SpaceResponse> findAllByCategory(String typeName);
 
     List<Space> findByName(String name);
 
     Space findById(Integer id);
 
-    Space create(SpaceRequest request) throws ParseException;
+    List<Space> create(SpaceRequest request) throws ParseException;
 
     Reservation rent(ReservationRequest request) throws ParseException;
 
