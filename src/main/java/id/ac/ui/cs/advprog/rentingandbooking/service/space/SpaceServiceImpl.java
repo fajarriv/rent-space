@@ -1,12 +1,13 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
 import id.ac.ui.cs.advprog.rentingandbooking.dto.ReservationRequest;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceRequest;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Invoice;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
+import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceStatus;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
 
 import id.ac.ui.cs.advprog.rentingandbooking.util.DateUtils;
@@ -68,7 +69,7 @@ public class SpaceServiceImpl implements SpaceService {
                     .price(request.getPrice())
                     .capacity(request.getCapacity())
                     .isAvailable(true)
-                    .isValidated(false)
+                    .status(SpaceStatus.ON_REVIEW)
                     .facilities(request.getFacilities())
                     .build();
             spaceRepository.save(newSpace);

@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.rentingandbooking.dto;
+package id.ac.ui.cs.advprog.rentingandbooking.dto.space;
 
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import lombok.AllArgsConstructor;

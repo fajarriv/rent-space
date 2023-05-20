@@ -39,13 +39,15 @@ public class Space {
 
     @Column(nullable = false)
     private Boolean isAvailable;
-
+    
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Boolean isValidated;
+    private SpaceStatus status;
 
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "category_name", nullable = false)
+    @Enumerated(EnumType.STRING)
     private SpaceCategory category;
 
     @OneToOne(mappedBy = "space", cascade = CascadeType.ALL, orphanRemoval = true)

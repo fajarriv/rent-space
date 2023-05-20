@@ -1,8 +1,8 @@
 package id.ac.ui.cs.advprog.rentingandbooking.controller;
 
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceRequest;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.service.space.SpaceService;
 import lombok.RequiredArgsConstructor;

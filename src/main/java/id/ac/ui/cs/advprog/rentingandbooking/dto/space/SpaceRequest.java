@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.rentingandbooking.dto;
+package id.ac.ui.cs.advprog.rentingandbooking.dto.space;
 
 
 import jakarta.persistence.Column;
