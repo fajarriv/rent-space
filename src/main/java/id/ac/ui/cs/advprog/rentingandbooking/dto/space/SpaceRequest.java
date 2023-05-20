@@ -1,7 +1,6 @@
 package id.ac.ui.cs.advprog.rentingandbooking.dto.space;
 
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

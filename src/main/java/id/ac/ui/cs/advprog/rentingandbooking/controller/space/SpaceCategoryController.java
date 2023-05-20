@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.rentingandbooking.controller;
+package id.ac.ui.cs.advprog.rentingandbooking.controller.space;
 
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceCategoryRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;

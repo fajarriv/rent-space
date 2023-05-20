@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.rentingandbooking.model.space;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
@@ -27,6 +28,7 @@ public class Space {
     @Column(nullable = false)
     private String name;
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date date;
     @Column(nullable = false, columnDefinition = "INT CHECK (price > 0)")
@@ -51,6 +53,7 @@ public class Space {
     private SpaceCategory category;
 
     @OneToOne(mappedBy = "space", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private Reservation reservation;
 
     @ElementCollection

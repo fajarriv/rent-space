@@ -1,9 +1,8 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.ReservationRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
-import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Invoice;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
@@ -51,7 +50,7 @@ public class SpaceServiceImpl implements SpaceService {
 
     @Override
     public Space findById(Integer id) {
-        return spaceRepository.findById(id).get();
+        return spaceRepository.findById(id).orElse(null);
     }
 
 
@@ -79,23 +78,15 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public Reservation rent(ReservationRequest request) throws ParseException {
-        Date date = DateUtils.parseDate(request.getDate());
-        Space space = findById(request.getSpace().getId());
-        int totalPrice = space.getPrice() * request.getDuration();
-        Invoice newInvoice = Invoice.builder()
-                .createdAt((java.sql.Date) date)
-                .totalPrice(totalPrice)
-                .isCompleted(false)
-                .paymentMethod(request.getPaymentMethod())
-                .build();
-
+    public Space updateById(Integer id, SpaceRequest request) {
         return null;
     }
 
     @Override
-    public Space updateById(Integer id, SpaceRequest request) {
-        return null;
+    public void updateAvailibility(Integer id, Boolean currentStatus) {
+        Space space = this.findById(id);
+        space.setIsAvailable(!currentStatus);
+        spaceRepository.save(space);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.ReservationRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
@@ -22,9 +22,9 @@ public interface SpaceService {
 
     List<Space> create(SpaceRequest request) throws ParseException;
 
-    Reservation rent(ReservationRequest request) throws ParseException;
-
     Space updateById(Integer id, SpaceRequest request);
+
+    void updateAvailibility(Integer spaceId, Boolean isAvailable);
 
     void deleteById(Integer id);
 }
