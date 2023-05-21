@@ -15,9 +15,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReservationResponse {
     private Integer id;
+    private String email;
+    private Boolean isPaid;
     private Integer spaceId;
     private String spaceName;
     private Integer spacePrice;
     private Date rentDate;
-
+//    field penyewa
 }

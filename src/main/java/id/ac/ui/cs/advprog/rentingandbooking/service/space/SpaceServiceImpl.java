@@ -36,6 +36,15 @@ public class SpaceServiceImpl implements SpaceService {
         return spaceRepository.findAllDistinct();
     }
 
+    public List<Space> findSpacesForAdmin() {
+        return spaceRepository.findDistinctAdmin();
+    }
+
+    @Override
+    public List<Space> findMySpaces(String currentUser) {
+        return spaceRepository.findMySpaces(currentUser);
+    }
+
     @Override
     public List<SpaceResponse> findAllByCategory(String typeName) {
         SpaceCategory type = spaceCategoryService.findByName(typeName);
@@ -58,7 +67,7 @@ public class SpaceServiceImpl implements SpaceService {
 
 
     @Override
-    public List<Space> create(SpaceRequest request) throws ParseException {
+    public List<Space> create(SpaceRequest request) {
         if (isSpaceNameAlreadyExist(request.getName())) {
             throw new SpaceNameAlreadyExistException(request.getName());
         }
@@ -68,6 +77,7 @@ public class SpaceServiceImpl implements SpaceService {
         for (Date date : allDate) {
             Space newSpace = Space.builder()
                     .name(request.getName())
+                    .owner(request.getOwner())
                     .description(request.getDescription())
                     .date(date)
                     .category(category)
@@ -86,6 +96,14 @@ public class SpaceServiceImpl implements SpaceService {
     @Override
     public Space updateById(Integer id, SpaceRequest request) {
         return null;
+    }
+
+    @Override
+    public String updateStatusByName(String name, String status) {
+        List<Space> spaces = this.findByName(name);
+        spaces.forEach(space -> changeSpaceStatus(space, SpaceStatus.valueOf(status.toUpperCase())));
+
+        return "Space with name " + name + " has been updated to " + status;
     }
 
     @Override
@@ -110,4 +128,8 @@ public class SpaceServiceImpl implements SpaceService {
         return !spaceRepository.findByName(name).isEmpty();
     }
 
+    private void changeSpaceStatus(Space space, SpaceStatus status) {
+        space.setStatus(status);
+        spaceRepository.save(space);
+    }
 }

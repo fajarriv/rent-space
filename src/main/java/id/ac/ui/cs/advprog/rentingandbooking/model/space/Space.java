@@ -26,6 +26,8 @@ public class Space {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
+    private String owner;
+    @Column(nullable = false)
     private String name;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
@@ -41,7 +43,7 @@ public class Space {
 
     @Column(nullable = false)
     private Boolean isAvailable;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SpaceStatus status;
@@ -58,14 +60,4 @@ public class Space {
 
     @ElementCollection
     private List<String> facilities;
-
-    //TODO: Layanan opsional
-//    @ElementCollection
-//    private List<String> facilities;
-
-//TODO: Column for user (owner)
-//    @JsonBackReference
-//    @ManyToOne
-//    @JoinColumn(name = "_user_id", nullable = false)
-//    private User user;
 }

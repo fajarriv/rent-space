@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.rentingandbooking.controller.space;
 
 
+import id.ac.ui.cs.advprog.rentingandbooking.dto.Temporary;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
@@ -32,7 +33,19 @@ public class SpaceController {
         response = spaceService.findAllDistinct();
         return ResponseEntity.ok(response);
     }
-
+    @GetMapping("/me")
+    public ResponseEntity<List<Space>> getMySpace(@RequestBody Temporary request) {
+//        Get current user
+        List<Space> response;
+        response = spaceService.findMySpaces(request.getCurrentUser());
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/admin")
+    public ResponseEntity<List<Space>> getAllAdminDistinct() {
+        List<Space> response;
+        response = spaceService.findSpacesForAdmin();
+        return ResponseEntity.ok(response);
+    }
     @GetMapping("/{name}")
     public ResponseEntity<List<Space>> getSpaceByName(@PathVariable String name) {
         List<Space> response;
@@ -40,21 +53,23 @@ public class SpaceController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/by-category/{typeName}")
-    public ResponseEntity<List<SpaceResponse>> getSpaceByType(@PathVariable String typeName) {
+    @GetMapping("/category/{categoryName}")
+    public ResponseEntity<List<SpaceResponse>> getSpaceByType(@PathVariable String categoryName) {
         List<SpaceResponse> response;
-        response = spaceService.findAllByCategory(typeName);
+        response = spaceService.findAllByCategory(categoryName);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("")
-    public ResponseEntity<List<Space>> creatSpaces(@RequestBody SpaceRequest request) {
+    public ResponseEntity<List<Space>> createSpaces(@RequestBody SpaceRequest request) {
         List<Space> response;
-        try {
-            response = spaceService.create(request);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        response = spaceService.create(request);
+        return ResponseEntity.ok(response);
+    }
+    @PatchMapping("/{name}/{status}")
+    public ResponseEntity<String> updateSpaceStatus(@PathVariable String name, @PathVariable String status) {
+        String response;
+        response = spaceService.updateStatusByName(name, status);
         return ResponseEntity.ok(response);
     }
 }

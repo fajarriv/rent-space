@@ -15,13 +15,15 @@ import java.util.List;
 @AllArgsConstructor
 public class SpaceResponse {
     private String name;
+    private String owner;
     private Integer price;
     private Integer capacity;
     private String description;
     private SpaceCategory category;
-
-    public SpaceResponse(String name, String description, SpaceCategory category, Integer capacity, Integer price) {
+//    owner field
+    public SpaceResponse(String name,String owner, String description, SpaceCategory category, Integer capacity, Integer price) {
         this.name = name;
+        this.owner = owner;
         this.description = description;
         this.capacity = capacity;
         this.category = category;

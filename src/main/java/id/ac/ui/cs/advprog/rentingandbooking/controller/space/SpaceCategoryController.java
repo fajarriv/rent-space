@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/space/category")
+@RequestMapping("/api/v1/space-category")
 @RequiredArgsConstructor
 public class SpaceCategoryController {
 

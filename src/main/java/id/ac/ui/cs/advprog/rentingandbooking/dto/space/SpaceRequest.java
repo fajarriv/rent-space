@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SpaceRequest {
     private String name;
-
+    private String owner;
     private List<Date> date;
 
     private Integer price;

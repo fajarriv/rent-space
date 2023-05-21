@@ -14,6 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ReservationRequest {
     private List<Integer> spaceId;
-
+    private String email;
 //    TODO: Add user
 }
