@@ -1,12 +1,9 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
-import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 
-import java.text.ParseException;
 import java.util.List;
 
 public interface SpaceService {
@@ -14,15 +11,21 @@ public interface SpaceService {
 
     List<SpaceResponse> findAllDistinct();
 
+    List<Space> findSpacesForAdmin();
+
+    List<Space>findMySpaces(String ownerName);
+
     List<SpaceResponse> findAllByCategory(String typeName);
 
     List<Space> findByName(String name);
 
     Space findById(Integer id);
 
-    List<Space> create(SpaceRequest request) throws ParseException;
+    List<Space> create(SpaceRequest request);
 
     Space updateById(Integer id, SpaceRequest request);
+
+    String updateStatusByName(String name, String status);
 
     void updateAvailibility(Integer spaceId, Boolean isAvailable);
 

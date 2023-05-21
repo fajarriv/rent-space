@@ -21,6 +21,8 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
+    private String email;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "space_id", nullable = false)
