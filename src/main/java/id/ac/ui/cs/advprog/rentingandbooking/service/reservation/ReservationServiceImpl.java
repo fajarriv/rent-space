@@ -2,15 +2,14 @@ package id.ac.ui.cs.advprog.rentingandbooking.service.reservation;
 
 import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationResponse;
+import id.ac.ui.cs.advprog.rentingandbooking.exceptions.space.SpaceDoesNotAvailableException;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.ReservationRepository;
-import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
 import id.ac.ui.cs.advprog.rentingandbooking.service.space.SpaceServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -19,7 +18,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     private final SpaceServiceImpl spaceService;
     private final ReservationRepository reservationRepository;
-    private final SpaceRepository spaceRepository;
 
     @Override
     public String create(ReservationRequest request) {
@@ -29,6 +27,10 @@ public class ReservationServiceImpl implements ReservationService {
                     .space(space)
                     .isPaid(false)
                     .build();
+            if (!isSpaceAvailable(space.getId())) {
+                throw new SpaceDoesNotAvailableException(space);
+            }
+
             reservationRepository.save(newReservation);
             spaceService.updateAvailibility(space.getId(), space.getIsAvailable());
         });
@@ -49,5 +51,9 @@ public class ReservationServiceImpl implements ReservationService {
                 .spacePrice(reservation.getSpace().getPrice())
                 .rentDate(reservation.getSpace().getDate())
                 .build()).toList();
+    }
+
+    private boolean isSpaceAvailable(Integer spaceId) {
+        return spaceService.findById(spaceId).getIsAvailable();
     }
 }

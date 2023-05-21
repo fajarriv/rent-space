@@ -1,15 +1,15 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
 import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
-import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
+import id.ac.ui.cs.advprog.rentingandbooking.exceptions.space.SpaceIdDoesNotExistException;
+import id.ac.ui.cs.advprog.rentingandbooking.exceptions.space.SpaceNameAlreadyExistException;
+import id.ac.ui.cs.advprog.rentingandbooking.exceptions.space.SpaceNameDoesNotExistException;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceStatus;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
 
-import id.ac.ui.cs.advprog.rentingandbooking.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,21 +44,27 @@ public class SpaceServiceImpl implements SpaceService {
 
     @Override
     public List<Space> findByName(String name) {
+        if (isSpaceNameDoesNotExist(name)) {
+            throw new SpaceNameDoesNotExistException(name);
+        }
         return spaceRepository.findByName(name);
     }
 
 
     @Override
     public Space findById(Integer id) {
-        return spaceRepository.findById(id).orElse(null);
+        return spaceRepository.findById(id).orElseThrow(() -> new SpaceIdDoesNotExistException(id));
     }
 
 
     @Override
     public List<Space> create(SpaceRequest request) throws ParseException {
-//        Iterate through the list of date from request.getDate() then create a new space for each date
+        if (isSpaceNameAlreadyExist(request.getName())) {
+            throw new SpaceNameAlreadyExistException(request.getName());
+        }
         List<Date> allDate = request.getDate();
         SpaceCategory category = spaceCategoryService.findByName(request.getCategoryName());
+        // Iterate through the list of date from request.getDate() then create a new space for each date
         for (Date date : allDate) {
             Space newSpace = Space.builder()
                     .name(request.getName())
@@ -91,7 +97,17 @@ public class SpaceServiceImpl implements SpaceService {
 
     @Override
     public void deleteById(Integer id) {
+        Space space = this.findById(id);
+        spaceRepository.delete(space);
 
+    }
+
+    private boolean isSpaceNameDoesNotExist(String name) {
+        return spaceRepository.findByName(name).isEmpty();
+    }
+
+    private boolean isSpaceNameAlreadyExist(String name) {
+        return !spaceRepository.findByName(name).isEmpty();
     }
 
 }
