@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.rentingandbooking.dto;
+package id.ac.ui.cs.advprog.rentingandbooking.dto.reservation;
 
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import lombok.AllArgsConstructor;
@@ -6,15 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationRequest {
-    private Space space;
-    private String date;
+    private List<Integer> spaceId;
 
-    private int duration;
-
-    private String paymentMethod;
+//    TODO: Add user
 }

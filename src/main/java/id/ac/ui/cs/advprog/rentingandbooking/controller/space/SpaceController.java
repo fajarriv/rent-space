@@ -1,8 +1,8 @@
-package id.ac.ui.cs.advprog.rentingandbooking.controller;
+package id.ac.ui.cs.advprog.rentingandbooking.controller.space;
 
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceRequest;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.service.space.SpaceService;
 import lombok.RequiredArgsConstructor;
@@ -13,24 +13,22 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/space")
+@RequestMapping("/api/v1/space")
 @RequiredArgsConstructor
 public class SpaceController {
 
     private final SpaceService spaceService;
 
-    @GetMapping("/all")
+    @GetMapping("/all-spaces")
     public ResponseEntity<List<Space>> getAllSpace() {
         List<Space> response;
-        // TODO: Lengkapi kode berikut
         response = spaceService.findAll();
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all-distinct")
+    @GetMapping("")
     public ResponseEntity<List<SpaceResponse>> getAllDistinct() {
         List<SpaceResponse> response;
-        // TODO: Lengkapi kode berikut
         response = spaceService.findAllDistinct();
         return ResponseEntity.ok(response);
     }
@@ -42,16 +40,16 @@ public class SpaceController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/type/{type}")
-    public ResponseEntity<List<Space>> getSpaceByType(@PathVariable String type) {
-        List<Space> response;
-        response = spaceService.findAllByType(type);
+    @GetMapping("/by-category/{typeName}")
+    public ResponseEntity<List<SpaceResponse>> getSpaceByType(@PathVariable String typeName) {
+        List<SpaceResponse> response;
+        response = spaceService.findAllByCategory(typeName);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Space> addSpace(@RequestBody SpaceRequest request) {
-        Space response;
+    @PostMapping("")
+    public ResponseEntity<List<Space>> creatSpaces(@RequestBody SpaceRequest request) {
+        List<Space> response;
         try {
             response = spaceService.create(request);
         } catch (ParseException e) {

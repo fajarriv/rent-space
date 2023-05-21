@@ -1,9 +1,8 @@
 package id.ac.ui.cs.advprog.rentingandbooking.service.space;
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.ReservationRequest;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceRequest;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceTypeRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.reservation.ReservationRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceRequest;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.reservation.Reservation;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 
@@ -15,17 +14,17 @@ public interface SpaceService {
 
     List<SpaceResponse> findAllDistinct();
 
-    List<Space> findAllByType(String typeName);
+    List<SpaceResponse> findAllByCategory(String typeName);
 
     List<Space> findByName(String name);
 
     Space findById(Integer id);
 
-    Space create(SpaceRequest request) throws ParseException;
-
-    Reservation rent(ReservationRequest request) throws ParseException;
+    List<Space> create(SpaceRequest request) throws ParseException;
 
     Space updateById(Integer id, SpaceRequest request);
+
+    void updateAvailibility(Integer spaceId, Boolean isAvailable);
 
     void deleteById(Integer id);
 }

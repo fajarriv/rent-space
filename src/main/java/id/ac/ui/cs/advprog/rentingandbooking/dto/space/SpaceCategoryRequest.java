@@ -1,4 +1,4 @@
-package id.ac.ui.cs.advprog.rentingandbooking.dto;
+package id.ac.ui.cs.advprog.rentingandbooking.dto.space;
 
 
 import lombok.AllArgsConstructor;
@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpaceTypeRequest {
+public class SpaceCategoryRequest {
     private String name;
+    
+    private String type;
 }

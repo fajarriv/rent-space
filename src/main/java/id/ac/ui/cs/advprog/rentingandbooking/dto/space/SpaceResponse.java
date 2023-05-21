@@ -1,10 +1,12 @@
-package id.ac.ui.cs.advprog.rentingandbooking.dto;
+package id.ac.ui.cs.advprog.rentingandbooking.dto.space;
 
-import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
+import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Data
@@ -16,13 +18,13 @@ public class SpaceResponse {
     private Integer price;
     private Integer capacity;
     private String description;
-    private SpaceType typeName;
+    private SpaceCategory category;
 
-    public SpaceResponse(String name, String description, SpaceType type, Integer capacity,  Integer price) {
+    public SpaceResponse(String name, String description, SpaceCategory category, Integer capacity, Integer price) {
         this.name = name;
         this.description = description;
         this.capacity = capacity;
-        this.typeName = type;
+        this.category = category;
         this.price = price;
     }
 }

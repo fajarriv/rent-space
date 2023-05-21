@@ -1,13 +1,13 @@
-package id.ac.ui.cs.advprog.rentingandbooking.dto;
+package id.ac.ui.cs.advprog.rentingandbooking.dto.space;
 
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -16,12 +16,14 @@ import java.util.Date;
 public class SpaceRequest {
     private String name;
 
-    private String date;
+    private List<Date> date;
 
     private Integer price;
 
     private Integer capacity;
 
     private String description;
-    private String typeName;
+    private String categoryName;
+    private List<String> facilities;
+
 }

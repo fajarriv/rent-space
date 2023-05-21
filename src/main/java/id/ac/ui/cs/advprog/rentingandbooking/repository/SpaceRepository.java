@@ -1,8 +1,8 @@
 package id.ac.ui.cs.advprog.rentingandbooking.repository;
 
-import id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse;
+import id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
-import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
+import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
@@ -14,10 +14,15 @@ import java.util.Optional;
 @Repository
 public interface SpaceRepository extends JpaRepository<Space, Integer> {
 
-    @Query(value = "SELECT DISTINCT new id.ac.ui.cs.advprog.rentingandbooking.dto.SpaceResponse(s.name,s.description,s.type,s.capacity,s.price) FROM Space s")
+    @NonNull
+    Optional<Space> findById(@NonNull Integer id);
+
+    @Query(value = "SELECT DISTINCT new id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse(s.name,s.description,s.category ,s.capacity,s.price) FROM Space s")
     List<SpaceResponse> findAllDistinct();
 
-    List<Space> findByName(String name);
+    List<Space> findByName(@NonNull String name);
 
-    List<Space> findDistinctByType(SpaceType type);
+    @Query(value = "SELECT DISTINCT new id.ac.ui.cs.advprog.rentingandbooking.dto.space.SpaceResponse(s.name,s.description,s.category ,s.capacity,s.price) FROM Space s WHERE s.category = ?1")
+    List<SpaceResponse> findDistinctByCategory(SpaceCategory category);
+
 }
