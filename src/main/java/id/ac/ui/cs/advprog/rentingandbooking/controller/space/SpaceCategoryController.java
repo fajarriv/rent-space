@@ -5,6 +5,7 @@ import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import id.ac.ui.cs.advprog.rentingandbooking.service.space.SpaceCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class SpaceCategoryController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ROOM_PROVIDER')")
     @PostMapping("")
     public ResponseEntity<SpaceCategory> addSpaceCategory(@RequestBody SpaceCategoryRequest request) {
         SpaceCategory response;

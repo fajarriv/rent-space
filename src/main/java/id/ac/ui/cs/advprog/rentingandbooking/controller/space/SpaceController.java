@@ -8,9 +8,9 @@ import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.service.space.SpaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -20,6 +20,7 @@ public class SpaceController {
 
     private final SpaceService spaceService;
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/all-spaces")
     public ResponseEntity<List<Space>> getAllSpace() {
         List<Space> response;
@@ -33,6 +34,8 @@ public class SpaceController {
         response = spaceService.findAllDistinct();
         return ResponseEntity.ok(response);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ROOM_PROVIDER')")
     @GetMapping("/me")
     public ResponseEntity<List<Space>> getMySpace(@RequestBody Temporary request) {
 //        Get current user
@@ -40,12 +43,15 @@ public class SpaceController {
         response = spaceService.findMySpaces(request.getCurrentUser());
         return ResponseEntity.ok(response);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/admin")
     public ResponseEntity<List<Space>> getAllAdminDistinct() {
         List<Space> response;
         response = spaceService.findSpacesForAdmin();
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/{name}")
     public ResponseEntity<List<Space>> getSpaceByName(@PathVariable String name) {
         List<Space> response;
@@ -60,12 +66,15 @@ public class SpaceController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ROOM_PROVIDER')")
     @PostMapping("")
     public ResponseEntity<List<Space>> createSpaces(@RequestBody SpaceRequest request) {
         List<Space> response;
         response = spaceService.create(request);
         return ResponseEntity.ok(response);
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/{name}/{status}")
     public ResponseEntity<String> updateSpaceStatus(@PathVariable String name, @PathVariable String status) {
         String response;
