@@ -46,8 +46,8 @@ public class SpaceController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/admin")
-    public ResponseEntity<List<Space>> getAllAdminDistinct() {
-        List<Space> response;
+    public ResponseEntity<List<SpaceResponse>> getAllAdminDistinct() {
+        List<SpaceResponse> response;
         response = spaceService.findSpacesForAdmin();
         return ResponseEntity.ok(response);
     }

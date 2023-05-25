@@ -11,7 +11,7 @@ public interface SpaceService {
 
     List<SpaceResponse> findAllDistinct();
 
-    List<Space> findSpacesForAdmin();
+    List<SpaceResponse> findSpacesForAdmin();
 
     List<Space>findMySpaces(String ownerName);
 
@@ -22,8 +22,6 @@ public interface SpaceService {
     Space findById(Integer id);
 
     List<Space> create(SpaceRequest request);
-
-    Space updateById(Integer id, SpaceRequest request);
 
     String updateStatusByName(String name, String status);
 
