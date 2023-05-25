@@ -14,5 +14,4 @@ import java.util.List;
 public class ReservationPayment {
     private List<Integer> reservationId;
     private String email;
-//    TODO: Add user
 }

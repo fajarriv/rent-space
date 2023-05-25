@@ -18,5 +18,5 @@ public interface ReservationService {
     List<ReservationResponse> findUnpaidReservations(String email);
 
     List<ReservationResponse> updatePaymentStatus(ReservationPayment request);
-//    TODO: findbyuser
+
 }

@@ -28,7 +28,7 @@ public class SpaceCategoryServiceImpl implements SpaceCategoryService {
         if (isSpaceCategoryDoesNotExist(name)) {
             throw new SpaceCategoryDoesNotExistException(name);
         }
-        return spaceCategoryRepository.findById(name).orElse(null);
+        return spaceCategoryRepository.findByName(name).orElse(null);
     }
 
     @Override
