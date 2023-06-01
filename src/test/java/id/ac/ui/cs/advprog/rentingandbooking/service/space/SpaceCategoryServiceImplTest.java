@@ -7,7 +7,6 @@ import id.ac.ui.cs.advprog.rentingandbooking.exceptions.space.SpaceTypeDoesNotEx
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceCategoryRepository;
-import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class SpaceCategoryServiceImplTest {
+class SpaceCategoryServiceImplTest {
 
     @InjectMocks
     SpaceCategoryServiceImpl spaceCategoryService;

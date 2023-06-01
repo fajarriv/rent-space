@@ -11,7 +11,6 @@ import id.ac.ui.cs.advprog.rentingandbooking.model.space.Space;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceCategory;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceStatus;
 import id.ac.ui.cs.advprog.rentingandbooking.model.space.SpaceType;
-import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceCategoryRepository;
 import id.ac.ui.cs.advprog.rentingandbooking.repository.SpaceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,10 +23,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 class SpaceServiceImplTest {

@@ -54,7 +54,7 @@ tasks.test {
 tasks.jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*Application**', '**/dto/**', '**/exception/**', '**/model/**', '**/util/**'])
+            fileTree(dir: it, exclude: ['**/*Application**', '**/dto/**', '**/exceptions/**', '**/model/**', '**/util/**','**/repository/**', '**/config/**'])
         }))
     }
     dependsOn(tasks.test) // tests are required to run before generating the report
