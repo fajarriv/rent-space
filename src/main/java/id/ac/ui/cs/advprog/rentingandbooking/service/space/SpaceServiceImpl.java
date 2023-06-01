@@ -36,7 +36,7 @@ public class SpaceServiceImpl implements SpaceService {
         return spaceRepository.findAllDistinct();
     }
 
-    public List<Space> findSpacesForAdmin() {
+    public List<SpaceResponse> findSpacesForAdmin() {
         return spaceRepository.findDistinctAdmin();
     }
 
@@ -91,11 +91,6 @@ public class SpaceServiceImpl implements SpaceService {
 
         }
         return spaceRepository.findByName(request.getName()).stream().toList();
-    }
-
-    @Override
-    public Space updateById(Integer id, SpaceRequest request) {
-        return null;
     }
 
     @Override

@@ -32,6 +32,4 @@ public class Reservation {
     @Column(nullable = false)
     private Boolean isPaid;
 
-//TODO: Column for user who reserve
-
 }
