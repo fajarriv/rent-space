@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 
 @Data
@@ -20,7 +19,6 @@ public class SpaceResponse {
     private Integer capacity;
     private String description;
     private SpaceCategory category;
-//    owner field
     public SpaceResponse(String name,String owner, String description, SpaceCategory category, Integer capacity, Integer price) {
         this.name = name;
         this.owner = owner;
