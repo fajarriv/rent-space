@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +35,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<ReservationResponse> findUnpaidReservations(String email) {
         List<Reservation> reservations = this.findAllByEmail(email);
-        List<Reservation> unpaidReservations = reservations.stream().filter(reservation -> !reservation.getIsPaid()).toList();
+        List<Reservation> unpaidReservations = reservations.stream().filter(reservation -> !reservation.getIsPaid()).collect(Collectors.toList());
         return convertToResponse(unpaidReservations);
     }
 
@@ -45,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public String create(ReservationRequest request) {
-        List<Space> spaces = request.getSpaceId().stream().map(spaceService::findById).toList();
+        List<Space> spaces = request.getSpaceId().stream().map(spaceService::findById).collect(Collectors.toList());
         spaces.forEach(space -> {
             Reservation newReservation = Reservation.builder()
                     .email(request.getEmail())
@@ -65,7 +66,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<ReservationResponse> updatePaymentStatus(ReservationPayment request) {
-        List<Reservation> reservations = request.getReservationId().stream().map(this::findById).toList();
+        List<Reservation> reservations = request.getReservationId().stream().map(this::findById).collect(Collectors.toList());
         reservations.forEach(reservation -> {
             reservation.setIsPaid(true);
             reservationRepository.save(reservation);
@@ -82,7 +83,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .spaceName(reservation.getSpace().getName())
                 .spacePrice(reservation.getSpace().getPrice())
                 .rentDate(reservation.getSpace().getDate())
-                .build()).toList();
+                .build()).collect(Collectors.toList());
     }
 
     private boolean isSpaceAvailable(Integer spaceId) {

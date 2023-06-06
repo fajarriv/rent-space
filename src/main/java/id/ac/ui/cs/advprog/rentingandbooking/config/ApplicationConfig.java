@@ -22,15 +22,15 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationConfig {
     private final RestTemplate restTemplate = new RestTemplate();
     @Value("${auth.service.url}")
-    private String AUTH_SERVICE_URL;
+    private String authServiceUrl;
 
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            ResponseEntity<UserResponse> response = restTemplate.getForEntity(String.format("%s/user/get-by-email/%s", AUTH_SERVICE_URL, username), UserResponse.class);
+            ResponseEntity<UserResponse> response = restTemplate.getForEntity(String.format("%s/user/get-by-email/%s", authServiceUrl, username), UserResponse.class);
             if (response.getStatusCode().is2xxSuccessful()) {
                 UserResponse userResponse = response.getBody();
-                User user = User
+                return User
                         .builder()
                         .firstname(userResponse.getFirstname())
                         .lastname(userResponse.getLastname())
@@ -39,7 +39,6 @@ public class ApplicationConfig {
                         .password(userResponse.getPassword())
                         .active(userResponse.isActive())
                         .build();
-                return user;
             } else {
                 throw new UsernameNotFoundException("User not found");
             }
