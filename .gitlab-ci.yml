@@ -89,6 +89,6 @@ Deploy:
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY $GCP_USERNAME@$GCP_STATIC_IP "
       docker container rm -f $CONTAINER_NAME || true &&
       docker image rm -f $REGISTRY_USER/$IMAGE_NAME:$IMAGE_TAG || true &&
-      docker run -e AUTH_SERVICE_URL=$AUTH_SERVICE_URL -e JWT_SECRET_KEY=$JWT_SECRET_KEY --name $CONTAINER_NAME -d -p 80:8080 $REGISTRY_USER/$IMAGE_NAME:$IMAGE_TAG"
+      docker run -e AUTH_SERVICE_URL=$AUTH_SERVICE_URL -e JWT_SECRET_KEY=$JWT_SECRET_KEY --name $CONTAINER_NAME -d -p 70:8080 $REGISTRY_USER/$IMAGE_NAME:$IMAGE_TAG"
   only:
     - main
