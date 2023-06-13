@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reservation")
+@CrossOrigin(origins = {"http://localhost:3000", "https://rent-space-fe.vercel.app"})
 @RequiredArgsConstructor
 public class ReservationController {
     private final ReservationService reservationService;
